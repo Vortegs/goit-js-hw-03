@@ -1,11 +1,12 @@
-function getAllPropValues(array, prop) {
-  const result = [];
+function calculateTotalPrice(array, prop) {
+  let result = 0;
 
-  for (const key of array) {
-    if (prop in key) {
-      result.push(key[prop]);
+  for (const item of array) {
+    if (prop === item.name) {
+      result += item.price * item.quantity;
     }
   }
+
   return result;
 }
 
@@ -20,11 +21,14 @@ const products = [
   { name: 'Захват', price: 1200, quantity: 2 },
 ];
 
-console.log(getAllPropValues(products, 'name'));
-// ['Радар', 'Радар', 'Радар', 'Сканер', 'Сканер', 'Дроид', 'Захват']
+console.log(calculateTotalPrice(products, 'Радар'));
+// 9080
 
-console.log(getAllPropValues(products, 'quantity'));
-// [4, 2, 1, 1, 3, 7, 2]
+console.log(calculateTotalPrice(products, 'Сканер'));
+// 10200
 
-console.log(getAllPropValues(products, 'category'));
-//  []
+console.log(calculateTotalPrice(products, 'Захват'));
+// 2400
+
+console.log(calculateTotalPrice(products, 'Дроид'));
+// 2800
